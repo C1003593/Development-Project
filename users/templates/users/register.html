@@ -1,4 +1,5 @@
 {% extends "ContactApplication/base.html" %}
+{% load crispy_forms_tags %}
 {% block content %}
 
 <div class="content-section">
@@ -6,7 +7,7 @@
     {% csrf_token %}
         <fieldset class="form-group">
             <legend class="border-bottom mb-4">Registration Form</legend>
-            {{ form.as_p }}
+            {{ form|crispy }}
         </fieldset>
         <div class="form-group">
             <button class="btn btn-outline-info" type="submit">Register</button>
@@ -14,7 +15,7 @@
     </form>
 
     <div class="border-top pt-3">
-        <small class="text-muted">Are You Already Registered?<a class="ml-2" href="#">Login</a></small>
+        <small class="text-muted">Are You Already Registered?<a class="ml-2" href="{% url 'login' %}">Login</a></small>
     </div>
 </div>
 {% endblock content %}

@@ -1,3 +1,3 @@
 from django.db import models
 
-# Create your models here.
+# as_crispy_field to render individual fields
