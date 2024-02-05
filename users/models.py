@@ -31,7 +31,7 @@ class MentorProfile(models.Model):
     DOB = models.DateField(null = True)
 
     def __str__(self):
-        return f'{self.MentorRefNumber}'
+        return f'{self.user}'
 
     
 # as_crispy_field to render individual fields
