@@ -6,10 +6,11 @@
     <form method="POST">
     {% csrf_token %}
         <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Student Registration Form</legend>
+            <legend class="border-bottom mb-4">User Registration Form</legend>
             {{ form|crispy }}
         </fieldset>
         <div class="form-group">
+            <h6>Please note: After registering you will need to enter additional details to have a profile. <br> You can do this on the profile creation page.</h6>
             <button class="btn btn-outline-info" type="submit">Register</button>
         </div>
     </form>

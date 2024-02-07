@@ -26,7 +26,12 @@ urlpatterns = [
     path('register', user_views.register, name = 'register'),
     path('login', auth_views.LoginView.as_view(template_name = 'users/login.html'), name = 'login'),
     path('logout', auth_views.LogoutView.as_view(template_name = 'users/logout.html'), name='logout'),
+
     path('studentprofile', user_views.studentprofile, name = 'studentprofile'),
+    path('mentorprofile', user_views.mentorprofile, name = 'mentorprofile'),
+    path('studentrepprofile', user_views.studentrepprofile, name = 'studentrepprofile'),
+
+    path('mentorrefgen', user_views.MentorNumGen, name = 'mentornumgen'),
 
 
 

@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils.crypto import get_random_string
+
 
 class StudentProfile(models.Model):
     user = models.OneToOneField(User, null = True, on_delete = models.CASCADE)
@@ -20,7 +20,7 @@ class StudentRepProfile(models.Model):
         return f'{self.StudentNumber}'
     
 class MentorRefNumberGen(models.Model):
-    MentorRefNumberRan = models.CharField(default=get_random_string(length=32), max_length=33)
+    MentorRefNumberRan = models.CharField(max_length=33)
     def __str__(self):
         return f'{self.MentorRefNumberRan}'
     

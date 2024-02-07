@@ -1,0 +1,27 @@
+{% extends "ContactApplication/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section">
+        <div class="media">
+            <div class="media-body">
+                <h2 class="account-heading">{{user.mentorprofile}}</h2>
+                    <p class="text-secondary">{{user.email}}</p>
+            </div>
+        </div>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Mentor profile details</legend>
+                {{ u_form.first_name|as_crispy_field }}
+                {{ u_form.last_name|as_crispy_field }}
+                <div style="display:none;">{{ u_form.email|as_crispy_field }}</div> 
+                {{ mp_form.AreaOfStudy|as_crispy_field }}
+                {{ mp_form.DOB|as_crispy_field }}
+                <div style="display:none;">{{ mp_form.MentorRefNumber|as_crispy_field }}</div>
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Update</button>
+            </div>
+        </form>
+    </div>
+{% endblock content %}
