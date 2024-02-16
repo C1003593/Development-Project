@@ -19,6 +19,9 @@
                 {{ mp_form.DOB|as_crispy_field }}
                 <div style="display:none;">{{ mp_form.MentorRefNumber|as_crispy_field }}</div>
             </fieldset>
+            <small class="text-muted">
+                Want to make a reference number for someone to become a mentor?<a class="ml-2" href="{% url 'mentornumgen' %}">Make reference number</a>
+            </small>
             <div class="form-group">
                 <button class="btn btn-outline-info" type="submit">Update</button>
             </div>
