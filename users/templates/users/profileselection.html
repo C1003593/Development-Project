@@ -1,0 +1,23 @@
+{% extends "ContactApplication/base.html" %}
+{% block content %}
+    <div class="content-section">
+        <div class="media">
+            <div class="media-body">
+                <h2 class="account-heading">{{user.username}}</h2>
+                    <p class="text-secondary">{{user.email}}</p>
+                <small class="text-muted">
+                    Need a student profile?<a class="ml-2" href="{% url 'studentprofilecreate' %}">Create student profile</a>
+                </small>
+            </br>
+                <small class="text-muted">
+                    Need a mentor profile?<a class="ml-2" href="{% url 'mentorprofilecreate' %}">Create mentor profile</a>
+                </small>
+            </br>
+                <small class="text-muted">
+                    Need a student rep profile?<a class="ml-2" href="{% url 'studentrepprofilecreate' %}">Create student rep profile</a>
+                </small>
+            </div>
+        </div>
+        
+    </div>
+{% endblock content %}

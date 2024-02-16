@@ -4,21 +4,21 @@
     <div class="content-section">
         <div class="media">
             <div class="media-body">
-                <h2 class="account-heading">{{user.studentrepprofile}}</h2>
+                <h2 class="account-heading">{{user.username}}</h2>
                     <p class="text-secondary">{{user.email}}</p>
             </div>
         </div>
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Student Rep profile details</legend>
-                {{ u_form.first_name|as_crispy_field }}
-                {{ u_form.last_name|as_crispy_field }}
-                <div style="display:none;">{{ u_form.email|as_crispy_field }}</div> 
-                {{ srp_form|crispy }}
+                <legend class="border-bottom mb-4">Student rep profile creation</legend>
+                    {{ sr_form|crispy }}
             </fieldset>
+            <small class="text-muted">
+                Please note that by registering as a student rep your profile will be shown to others and people may message you.
+            </small>
             <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Update</button>
+                <button class="btn btn-outline-info" type="submit">Create student rep profile</button>
             </div>
         </form>
     </div>

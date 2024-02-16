@@ -5,7 +5,6 @@
         <div class="media">
             <div class="media-body">
                 <h2 class="account-heading">{{user.studentprofile}}</h2>
-                    <p class="text-secondary">{{user.username}}</p>
                     <p class="text-secondary">{{user.email}}</p>
             </div>
         </div>
@@ -16,7 +15,9 @@
                 {{ u_form.first_name|as_crispy_field }}
                 {{ u_form.last_name|as_crispy_field }}
                 <div style="display:none;">{{ u_form.email|as_crispy_field }}</div> 
-                {{ sp_form|crispy }}
+                <div style="display:none;">{{ sp_form.StudentNumber|as_crispy_field }}</div>
+                {{ sp_form.AreaOfStudy|as_crispy_field }}
+                {{ sp_form.DOB|as_crispy_field }}
             </fieldset>
             <div class="form-group">
                 <button class="btn btn-outline-info" type="submit">Update</button>

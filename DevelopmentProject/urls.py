@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from users import views as user_views
+from users import views
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -27,6 +28,13 @@ urlpatterns = [
     path('login', auth_views.LoginView.as_view(template_name = 'users/login.html'), name = 'login'),
     path('logout', auth_views.LogoutView.as_view(template_name = 'users/logout.html'), name='logout'),
 
+    #Different profile creation pages
+    path('studentprofilecreate', user_views.studentprofilecreate, name = 'studentprofilecreate'),
+    path('mentorprofilecreate', user_views.mentorprofilecreate, name = 'mentorprofilecreate'),
+    path('studentrepprofilecreate', user_views.studentrepprofilecreate, name = 'studentrepprofilecreate'),
+    path('profileselector', views.profileselection, name = 'profileselector' ),
+
+    #Profile/update pages
     path('studentprofile', user_views.studentprofile, name = 'studentprofile'),
     path('mentorprofile', user_views.mentorprofile, name = 'mentorprofile'),
     path('studentrepprofile', user_views.studentrepprofile, name = 'studentrepprofile'),
