@@ -30,6 +30,7 @@ class MentorProfile(models.Model):
     MentorRefNumber = models.OneToOneField(MentorRefNumberGen, blank = False, max_length=33, on_delete = models.DO_NOTHING)
     AreaOfStudy = models.CharField(max_length=20, null = True)
     DOB = models.DateField(null = True)
+    Description = models.TextField(null = True)
     Image = models.ImageField(default = 'defaultpi.png', upload_to = 'mentor_pics')
 
     def __str__(self):

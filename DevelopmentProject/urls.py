@@ -34,7 +34,7 @@ urlpatterns = [
     path('studentprofilecreate', user_views.studentprofilecreate, name = 'studentprofilecreate'),
     path('mentorprofilecreate', user_views.mentorprofilecreate, name = 'mentorprofilecreate'),
     path('studentrepprofilecreate', user_views.studentrepprofilecreate, name = 'studentrepprofilecreate'),
-    path('profileselector', views.profileselection, name = 'profileselector' ),
+    path('profileselector', views.profileselection, name = 'profileselector'),
 
     #Profile/update pages
     path('studentprofile', user_views.studentprofile, name = 'studentprofile'),
