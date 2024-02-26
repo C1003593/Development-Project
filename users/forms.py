@@ -33,7 +33,7 @@ class MentorProfileUpdateForm(forms.ModelForm):
     MentorRefNumber = forms.CharField()
     AreaOfStudy = forms.CharField(label='Your area of study.', help_text = 'Enter which area of study you are involved with.')
     DOB = forms.DateField(label='Your date of birth.', help_text = 'Enter in the format YYYY-MM-DD')
-    Description = forms.CharField()
+    Description = forms.TextInput()
     class Meta:
         model = MentorProfile
         fields = ['MentorRefNumber', 'AreaOfStudy', 'Description', 'DOB']
@@ -66,6 +66,7 @@ class StudentProfileCreation(forms.ModelForm):
 class MentorProfileCreation(forms.ModelForm):
     MentorRefNumber = forms.CharField(label='Your given mentor number.', help_text='You must request a number from an already approved mentor')
     AreaOfStudy = forms.CharField(label='Your area of study.', help_text='Enter which area of study you are involved with.')
+    Description = forms.CharField(label='Description', help_text='Enter a description about what you will do as a mentor')
     DOB = forms.DateField(label='Your date of birth.', help_text='Enter in the format YYYY-MM-DD')
 
     def clean_MentorRefNumber(self):
@@ -76,13 +77,13 @@ class MentorProfileCreation(forms.ModelForm):
         return mentor_ref_number
     class Meta:
         model = MentorProfile
-        fields = ['MentorRefNumber', 'AreaOfStudy', 'DOB']
+        fields = ['MentorRefNumber', 'AreaOfStudy', 'Description', 'DOB']
     
 class StudentRepProfileCreation(forms.ModelForm):
     StudentNumber = forms.CharField(label='Your university student number.')
     AreaOfStudy = forms.CharField(label='Your area of study.', help_text = 'Enter which area of study you are involved with.')
     DOB = forms.DateField(label='Your date of birth.', help_text = 'Enter in the format YYYY-MM-DD')
-    Description = forms.CharField(label='Enter a description about what you will do as a mentor')
+    
     class Meta:
         model = StudentRepProfile
-        fields = ['StudentNumber', 'AreaOfStudy', 'Description', 'DOB']
+        fields = ['StudentNumber', 'AreaOfStudy', 'DOB']
