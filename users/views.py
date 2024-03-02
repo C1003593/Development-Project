@@ -56,7 +56,7 @@ def studentrepprofilecreate(request):
             messages.warning(request, 'Please correct the errors below.')
         return render(request, 'users/studentrepregister.html', {'sr_form': sr_form , 'title': 'Student rep registration form'})
     else:
-        sr_form = StudentProfileCreation()
+        sr_form = StudentRepProfileCreation()
         return render(request, 'users/studentrepregister.html', {'sr_form': sr_form , 'title': 'Student rep registration form'})
         
 

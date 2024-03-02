@@ -44,7 +44,7 @@ class StudentRepProfileUpdateForm(forms.ModelForm):
     DOB = forms.DateField(label='Your date of birth.', help_text = 'Enter in the format YYYY-MM-DD')
     class Meta:
         model = StudentRepProfile
-        fields = ['StudentNumber', 'AreaOfStudy', 'DOB']
+        fields = ['StudentNumber', 'AreaOfStudy', 'Description', 'DOB']
 
 class MentorRefNumGenForm(forms.ModelForm):
     MentorRefNumberRan = forms.CharField(label='Mentor reference number.', help_text = 'Make sure to copy this number before pressing confirm. <br> Give this code to someone who is qualified to be a mentor and click confirm below.')
@@ -82,8 +82,9 @@ class MentorProfileCreation(forms.ModelForm):
 class StudentRepProfileCreation(forms.ModelForm):
     StudentNumber = forms.CharField(label='Your university student number.')
     AreaOfStudy = forms.CharField(label='Your area of study.', help_text = 'Enter which area of study you are involved with.')
+    Description = forms.CharField(label='Description.', help_text='Enter a description about what you will do as a student rep')
     DOB = forms.DateField(label='Your date of birth.', help_text = 'Enter in the format YYYY-MM-DD')
     
     class Meta:
         model = StudentRepProfile
-        fields = ['StudentNumber', 'AreaOfStudy', 'DOB']
+        fields = ['StudentNumber', 'AreaOfStudy', 'Description', 'DOB']

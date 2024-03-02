@@ -17,3 +17,14 @@ class mentorListView(ListView):
     ordering = ['user']
     paginate_by = 5
     
+def studentreps(request):
+     
+     rep_list = {'studentreps': StudentRepProfile.objects.all(), 'title': 'These are the student reps working with us'}
+     return render(request, 'ContactApplication/reps.html', {'studentrepprofiles': rep_list})
+
+class repListView(ListView):
+     model = StudentRepProfile
+     template_name = 'ContactApplication/reps.html'
+     context_object_name = 'studentrepprofiles'
+     ordering = ['user']
+     paginate_by = 5

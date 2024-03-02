@@ -16,7 +16,9 @@ class StudentRepProfile(models.Model):
     user = models.OneToOneField(User, null = True, on_delete = models.CASCADE)
     StudentNumber = models.CharField(max_length=15, primary_key= 'StudentNumber')
     AreaOfStudy = models.CharField(max_length=20, null = True)
+    Description = models.TextField(null = True)
     DOB = models.DateField(null = True)
+    
     def __str__(self):
         return f'{self.StudentNumber}'
     
