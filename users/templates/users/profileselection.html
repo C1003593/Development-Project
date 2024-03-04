@@ -1,23 +1,31 @@
 {% extends "ContactApplication/base.html" %}
 {% block content %}
-    <div class="content-section">
-        <div class="media">
-            <div class="media-body">
-                <h2 class="account-heading">{{user.username}}</h2>
-                    <p class="text-secondary">{{user.email}}</p>
-                <small class="text-muted">
-                    Need a student profile?<a class="ml-2" href="{% url 'studentprofilecreate' %}">Create student profile</a>
-                </small>
-            </br>
-                <small class="text-muted">
-                    Need a mentor profile?<a class="ml-2" href="{% url 'mentorprofilecreate' %}">Create mentor profile</a>
-                </small>
-            </br>
-                <small class="text-muted">
-                    Need a student rep profile?<a class="ml-2" href="{% url 'studentrepprofilecreate' %}">Create student rep profile</a>
-                </small>
-            </div>
+<h1>Please select the type of profile you would like.</h1>
+<div class="columndisplay">
+    <div class="card">
+        <h2>Student profile</h2>
+        <p>When i was younger i belurnr ur vjh buhr bh bhr bhr bhr bjr bjhgr bjhr bjngr bjnr bjgr bhrb jhr bh bjhr bj bhr bjhr bjgr</p>
+        <div class="bottomcard">
+            <a class="ml-2" href="{% url 'studentprofilecreate' %}">Create student profile</a>
         </div>
-        
     </div>
+</div>
+<div class="columndisplay">
+    <div class="card">
+        <h2>Student rep profile</h2>
+        <p>When i was younger i belurnr ur vjh buhr bh bhr bhr bhr bjr bjhgr bjhr bjngr bjnr bjgr bhrb jhr bh bjhr bj bhr bjhr bjgr</p>
+        <div class="bottomcard">
+            <a class="ml-2" href="{% url 'studentrepprofilecreate' %}">Create student rep profile</a>
+        </div>
+    </div>
+</div>
+<div class="columndisplay">
+    <div class="card">
+        <h2>Mentor profile</h2>
+        <p>When i was younger i belurnr ur vjh buhr bh bhr bhr bhr bjr bjhgr bjhr bjngr bjnr bjgr bhrb jhr bh bjhr bj bhr bjhr bjgr</p>
+        <div class="bottomcard">
+            <a class="ml-2" href="{% url 'mentorprofilecreate' %}">Create mentor profile</a>
+        </div>
+    </div>
+</div>
 {% endblock content %}

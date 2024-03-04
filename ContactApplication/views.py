@@ -15,7 +15,7 @@ class mentorListView(ListView):
     template_name = 'ContactApplication/mentors.html'
     context_object_name = 'mentorprofiles'
     ordering = ['AreaOfStudy']
-    paginate_by = 4
+    paginate_by = 6
     
 def studentreps(request):
      
@@ -27,4 +27,4 @@ class repListView(ListView):
      template_name = 'ContactApplication/reps.html'
      context_object_name = 'studentrepprofiles'
      ordering = ['AreaOfStudy']
-     paginate_by = 4
+     paginate_by = 6

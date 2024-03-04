@@ -3,7 +3,7 @@ html {
     min-height: 100%;
   }
   
-  body {
+body {
     background: #fafafa;
     color: #333333;
     margin-top: 5rem;
@@ -24,7 +24,7 @@ html {
   }
   
   .bg-steel {
-    background-color: #9633aa;
+    background-color: #232124;
   }
   
   .site-header .navbar-nav .nav-link {
@@ -32,7 +32,7 @@ html {
   }
   
   .site-header .navbar-nav .nav-link:hover {
-    color: #ffffff;
+    color: #a5bae7;
   }
   
   .site-header .navbar-nav .nav-link.active {
@@ -49,7 +49,7 @@ html {
 
   .column {
     float: left;
-    width: 45%;
+    width: 30%;
     border-radius: 3px;
   }
 
@@ -58,39 +58,16 @@ html {
     width:100%
   }
 
-  .column1 {
+  .columndisplay {
     float: left;
-    width: 33.33%;
-    background-color: #e65151;
+    width: 30%;
     border-radius: 3px;
-    border: 1px solid #000000;
     padding-left: 2px;
     padding-right: 2px;
     
     }
 
-  .column2 {
-    float: left;
-    width: 33.33%;
-    background-color: #edc17a;
-    border-radius: 3px;
-    border: 1px solid #000000;
-    padding-left: 2px;
-    padding-right: 2px;
-    }
-
-  .column3 {
-    float: left;
-    width: 33.33%;
-    background-color: #4aea77;
-    border-radius: 3px;
-    border: 1px solid #000000;
-    padding-left: 2px;
-    padding-right: 2px;
-    }
-
-
-    .row:after {
+  .row:after {
     content: "";
     display: table;
     clear: both;

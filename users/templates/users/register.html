@@ -1,22 +1,25 @@
 {% extends "ContactApplication/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <div class="content-section">
+            <form method="POST">
+            {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">User Registration Form</legend>
+                    {{ form|crispy }}
+                </fieldset>
+                <div class="form-group">
+                    <h6>Please note: After registering you will need to enter additional details to have a profile. <br> You can do this on the profile creation page.</h6>
+                    <button class="btn btn-outline-info" type="submit">Register</button>
+                </div>
+            </form>
 
-<div class="content-section">
-    <form method="POST">
-    {% csrf_token %}
-        <fieldset class="form-group">
-            <legend class="border-bottom mb-4">User Registration Form</legend>
-            {{ form|crispy }}
-        </fieldset>
-        <div class="form-group">
-            <h6>Please note: After registering you will need to enter additional details to have a profile. <br> You can do this on the profile creation page.</h6>
-            <button class="btn btn-outline-info" type="submit">Register</button>
+            <div class="border-top pt-3">
+                <small class="text-muted">Are You Already Registered?<a class="ml-2" href="{% url 'login' %}">Login</a></small>
+            </div>
         </div>
-    </form>
-
-    <div class="border-top pt-3">
-        <small class="text-muted">Are You Already Registered?<a class="ml-2" href="{% url 'login' %}">Login</a></small>
     </div>
 </div>
 {% endblock content %}

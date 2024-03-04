@@ -1,27 +1,31 @@
 {% extends "ContactApplication/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <div class="content-section">
-        <div class="media">
-            <div class="media-body">
-                <h2 class="account-heading">{{user.studentprofile}}</h2>
-                    <p class="text-secondary">{{user.email}}</p>
+<div class="row">
+    <div class="col-md-8">
+        <div class="content-section">
+            <div class="media">
+                <div class="media-body">
+                    <h2 class="account-heading">{{user.studentprofile}}</h2>
+                        <p class="text-secondary">{{user.email}}</p>
+                </div>
             </div>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Student profile details</legend>
+                    {{ u_form.first_name|as_crispy_field }}
+                    {{ u_form.last_name|as_crispy_field }}
+                    <div style="display:none;">{{ u_form.email|as_crispy_field }}</div> 
+                    <div style="display:none;">{{ sp_form.StudentNumber|as_crispy_field }}</div>
+                    {{ sp_form.AreaOfStudy|as_crispy_field }}
+                    {{ sp_form.DOB|as_crispy_field }}
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit">Update</button>
+                </div>
+            </form>
         </div>
-        <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Student profile details</legend>
-                {{ u_form.first_name|as_crispy_field }}
-                {{ u_form.last_name|as_crispy_field }}
-                <div style="display:none;">{{ u_form.email|as_crispy_field }}</div> 
-                <div style="display:none;">{{ sp_form.StudentNumber|as_crispy_field }}</div>
-                {{ sp_form.AreaOfStudy|as_crispy_field }}
-                {{ sp_form.DOB|as_crispy_field }}
-            </fieldset>
-            <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Update</button>
-            </div>
-        </form>
     </div>
+</div>
 {% endblock content %}
