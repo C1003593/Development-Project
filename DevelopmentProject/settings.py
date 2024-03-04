@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'ContactApplication.apps.ContactapplicationConfig',
     'users.apps.UsersConfig',
     'crispy_forms',
+    #'crispy_bootstrap4',
     
     
 ]

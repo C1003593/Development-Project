@@ -46,6 +46,55 @@ html {
     border-radius: 3px;
     margin-bottom: 20px;
   }
+
+  .column {
+    float: left;
+    width: 45%;
+    border-radius: 3px;
+  }
+
+  .columnend {
+    float: left;
+    width:100%
+  }
+
+  .column1 {
+    float: left;
+    width: 33.33%;
+    background-color: #e65151;
+    border-radius: 3px;
+    border: 1px solid #000000;
+    padding-left: 2px;
+    padding-right: 2px;
+    
+    }
+
+  .column2 {
+    float: left;
+    width: 33.33%;
+    background-color: #edc17a;
+    border-radius: 3px;
+    border: 1px solid #000000;
+    padding-left: 2px;
+    padding-right: 2px;
+    }
+
+  .column3 {
+    float: left;
+    width: 33.33%;
+    background-color: #4aea77;
+    border-radius: 3px;
+    border: 1px solid #000000;
+    padding-left: 2px;
+    padding-right: 2px;
+    }
+
+
+    .row:after {
+    content: "";
+    display: table;
+    clear: both;
+    }
   
   .article-title {
     color: #444444;
@@ -101,4 +150,53 @@ html {
     height: 50px;
     line-height: 50px;
     background-color: #cccccc;
+  }
+
+
+  .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    width: 300px;
+    margin: 5px;
+    text-align: center;
+    font-family: arial;
+    padding-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    height: 800px;
+  }
+
+  .bottomcard {
+    position: absolute;
+    bottom: 0px;
+    width: 270px;
+    padding-bottom: 15px;
+
+  }
+  
+  .title {
+    color: grey;
+    font-size: 18px;
+  }
+  
+  button {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+  }
+  
+  a {
+    text-decoration: none;
+    font-size: 22px;
+    color: black;
+  }
+  
+  button:hover, a:hover {
+    opacity: 0.7;
   }

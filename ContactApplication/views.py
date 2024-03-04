@@ -14,8 +14,8 @@ class mentorListView(ListView):
     model = MentorProfile
     template_name = 'ContactApplication/mentors.html'
     context_object_name = 'mentorprofiles'
-    ordering = ['user']
-    paginate_by = 5
+    ordering = ['AreaOfStudy']
+    paginate_by = 4
     
 def studentreps(request):
      
@@ -26,5 +26,5 @@ class repListView(ListView):
      model = StudentRepProfile
      template_name = 'ContactApplication/reps.html'
      context_object_name = 'studentrepprofiles'
-     ordering = ['user']
-     paginate_by = 5
+     ordering = ['AreaOfStudy']
+     paginate_by = 4
