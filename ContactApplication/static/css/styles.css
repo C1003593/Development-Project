@@ -110,6 +110,7 @@ body {
     margin-right: 20px;
     margin-bottom: 16px;
   }
+
   
   .account-heading {
     font-size: 2.5rem;
@@ -131,7 +132,7 @@ body {
 
 
   .card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.2);
     width: 300px;
     margin: 5px;
     text-align: center;
@@ -176,4 +177,58 @@ body {
   
   button:hover, a:hover {
     opacity: 0.7;
+  }
+  .paddingelem {
+    height: 10px
+  }
+  .cardleft {
+    box-shadow: 0 4px 8px 4px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    margin: 5px;
+    text-align: left;
+    font-family: arial;
+    padding-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    height: 200px;
+  }
+  .cardright {
+    box-shadow: 0 4px 8px 4px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    margin: 5px;
+    text-align: right;
+    font-family: arial;
+    padding-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    height: 200px;
+  }
+
+  .sidenav {
+    height:100%;
+    width:160px;
+    position: fixed;
+    z-index:1;
+    top:0;
+    left:0;
+    background-color:#232124;
+    overflow-x: hidden;
+    padding-top: 20px;
+  }
+
+  .sidenav a {
+    padding:6px 8px 6px 16px;
+    text-decoration: none;
+    font-size:20px;
+    color: #cbd5db;
+    display:block;
+  }
+
+  .sidenav a:hover{
+    color:#a5bae7;
+  }	
+
+  .main{
+    margin-left:160px;
+    padding: 0px 10px;
   }

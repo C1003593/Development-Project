@@ -2,24 +2,24 @@
 {% block content %}
     <h1>Here are the mentors working with us!</h1>
     {% for mentorprofile in mentorprofiles %}
-        <div class="column">
-            <div class="card">
-                <div style="text-align: center;">
-                    <img class="rounded-circle" src="{{mentorprofile.Image.url}}", width="270", height="270">
-                </div>    
-                <h1>{{ mentorprofile.user.first_name }} {{ mentorprofile.user.last_name }}</h1>
-                <h2>Mentor</h2>
-                <p class="title"> Specialises in {{ mentorprofile.AreaOfStudy }}</p>
-                <p>{{ mentorprofile.Description }}</p>
-                <div class="bottomcard">
-                    <div class="article-metadata">
-                    </div>
-
-                    <p class="muted">Email address:</br> {{ mentorprofile.user.email }}</p>
-                    <a href="{% url 'ContactApplication:home' %}"><button>Contact</button></a>
+    <div class="column">
+        <div class="card">
+            <div style="text-align: center;">
+                <img class="rounded-circle" src="{{mentorprofile.Image.url}}", width="270", height="270">
+            </div>    
+            <h1>{{ mentorprofile.user.first_name }} {{ mentorprofile.user.last_name }}</h1>
+            <h2>Mentor</h2>
+            <p class="title"> Specialises in {{ mentorprofile.AreaOfStudy }}</p>
+            <p>{{ mentorprofile.Description }}</p>
+            <div class="bottomcard">
+                <div class="article-metadata">
                 </div>
+
+                <p class="muted">Email address:</br> {{ mentorprofile.user.email }}</p>
+                <a href="{% url 'ContactApplication:home' %}"><button>Contact</button></a>
             </div>
         </div>
+    </div>
             
     {% endfor %}
     <div class="columnend">
