@@ -16,12 +16,27 @@
 </head>
 
 <body>
+    {% if user.mentorprofile %}
+        <div class="sidenav">
+            <a href="#">null</a>
+            <a href="{% url 'messaging:inbox' %}">Messages</a>
+            <a href="/4">Forums</a>
+        </div>
+    {% elif user.studentprofile %}
+        <div class="sidenav">
+            <a href="#">null</a>
+            <a href="{% url 'messaging:inbox' %}">Messages</a>
+            <a href="/4">Forums</a>
+        </div>
+    {% elif user.studentrepprofile %}
+        <div class="sidenav">
+            <a href="#">null</a>
+            <a href="{% url 'messaging:inbox' %}">Messages</a>
+            <a href="/4">Forums</a>
+        </div>
+    {% else %}
+    {% endif %}
 
-    <div class="sidenav">
-        <a href="#">null</a>
-        <a href="{% url 'messaging:inbox' %}">Messages</a>
-        <a href="/4">Forums</a>
-    </div>
     <div class="container">
         <header class="site-header">
             <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">

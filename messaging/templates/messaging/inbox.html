@@ -10,29 +10,33 @@
 
             {% endif %}
         {% endwith %}
-        <div class="conversationcontainer">
+        <div class="conversationcontainer" id="messageBox">
             <ul>
                 {% for message in messages %}
                     <li>{{ message.sender.username }}: {{ message.content }}</li>
                 {% endfor %}
             </ul>
         </div>
-    {% with last_message=messages|last %}
-    <form method="post" action="{% url 'messaging:reply_message' last_message.id %}" id="replyForm_{{ conversation_id }}">
-        {% csrf_token %}
-        <input type="hidden" name="conversation_id" value="{{ conversation_id }}">
-        <input type="hidden" name="recipient_username" value="{% if last_message.sender != user %}{{ last_message.sender.username }}{% else %}{{ last_message.recipient.username }}{% endif %}">
-        <textarea name="content" id="replyContent_{{ conversation_id }}" placeholder="Reply"></textarea>
-        <button type="submit">Reply</button>
-    </form>
-    {% endwith %}
+    
+        <div style="bottom: 50px;">
+            <div class="conversationcontainerbottom">
+                {% with last_message=messages|last %}
+                <form method="post" action="{% url 'messaging:reply_message' last_message.id %}" id="replyForm_{{ conversation_id }}">
+                    {% csrf_token %}
+                    <input type="hidden" name="conversation_id" value="{{ conversation_id }}">
+                    <input type="hidden" name="recipient_username" value="{% if last_message.sender != user %}{{ last_message.sender.username }}{% else %}{{ last_message.recipient.username }}{% endif %}">
+                    <textarea name="content" class="replyContent" data-conversation-id="{{ conversation_id }}" style="width: calc(100%); resize: vertical; box-sizing: border-box;" placeholder="Type your message here!"></textarea>
+                    <button type="submit">Reply</button>
+                </form>
+                {% endwith %}
+            </div>
+        </div>
 {% endfor %}
-
 
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('[id^=replyContent_]').forEach(function(element) {
+    document.querySelectorAll('.replyContent').forEach(function(element) {
         element.addEventListener('input', function() {
             element.value = element.value.replace(/\n/g, ''); 
         });
@@ -40,10 +44,22 @@ document.addEventListener('DOMContentLoaded', function() {
         element.addEventListener('keypress', function(event) {
             if (event.key === 'Enter' && !event.shiftKey) {
                 event.preventDefault();
-                var conversationId = element.id.split('_')[1];
+                var conversationId = element.getAttribute('data-conversation-id');
                 document.getElementById('replyForm_' + conversationId).submit();
             }
         });
+    });
+});
+document.addEventListener('DOMContentLoaded', function() {
+    var messageBox = document.getElementById('messageBox');
+    
+    messageBox.scrollTop = messageBox.scrollHeight;
+});
+document.addEventListener('DOMContentLoaded', function() {
+    var textareas = document.querySelectorAll('.replyContent');
+    textareas.forEach(function(textarea) {
+        var conversationId = textarea.getAttribute('data-conversation-id');
+        textarea.focus();
     });
 });
 </script>

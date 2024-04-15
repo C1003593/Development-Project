@@ -1,9 +1,30 @@
 {% extends "ContactApplication/base.html" %}
 {% block content %}
 
-<form method="post">
+<form id="sendMessageForm" method="post">
     {% csrf_token %}
-    <textarea name="content"></textarea>
+    <textarea id="messageContent" name="content"></textarea>
     <button type="submit">Send</button>
 </form>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        var textarea = document.getElementById('messageContent');
+        textarea.focus();
+    });
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        var form = document.getElementById('sendMessageForm');
+        var textarea = document.getElementById('messageContent');
+        
+        textarea.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault(); 
+                form.submit(); 
+            }
+        });
+    });
+    </script>
 {% endblock content %}

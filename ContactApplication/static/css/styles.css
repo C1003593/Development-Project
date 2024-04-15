@@ -239,6 +239,33 @@ body {
     background-color: #ffffff;
     width: 400px;
     overflow-y: auto;
-    border: 1px solid #ccc; 
-    margin-bottom: 20px; 
+    border-top: 1px solid #ccc; 
+    border-left: 1px solid #ccc; 
+    border-right: 1px solid #ccc; 
 }
+  .conversationcontainer::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  .conversationcontainer::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  .conversationcontainer::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 6px;
+  }
+
+  .conversationcontainer::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+  .conversationcontainerbottom {
+    max-height: 140px; 
+    background-color: #ffffff;
+    width: 400px;
+    overflow-y: auto;
+    border-bottom: 1px solid #ccc; 
+    border-left: 1px solid #ccc; 
+    border-right: 1px solid #ccc; 
+  }
