@@ -1,0 +1,50 @@
+{% extends "ContactApplication/base.html" %}
+{% block content %}
+<h1>These are your messages</h1>
+{% for conversation_id, messages in conversations.items %}    
+        {% with first_message=messages.0 %}
+            {% if first_message.sender.username == request.user.username %}
+                <h2>{{ first_message.recipient.username }}</h2>
+            {% else %}
+                <h2>{{ first_message.sender.username }}</h2>
+
+            {% endif %}
+        {% endwith %}
+        <div class="conversationcontainer">
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message.sender.username }}: {{ message.content }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% with last_message=messages|last %}
+    <form method="post" action="{% url 'messaging:reply_message' last_message.id %}" id="replyForm_{{ conversation_id }}">
+        {% csrf_token %}
+        <input type="hidden" name="conversation_id" value="{{ conversation_id }}">
+        <input type="hidden" name="recipient_username" value="{% if last_message.sender != user %}{{ last_message.sender.username }}{% else %}{{ last_message.recipient.username }}{% endif %}">
+        <textarea name="content" id="replyContent_{{ conversation_id }}" placeholder="Reply"></textarea>
+        <button type="submit">Reply</button>
+    </form>
+    {% endwith %}
+{% endfor %}
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('[id^=replyContent_]').forEach(function(element) {
+        element.addEventListener('input', function() {
+            element.value = element.value.replace(/\n/g, ''); 
+        });
+
+        element.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                var conversationId = element.id.split('_')[1];
+                document.getElementById('replyForm_' + conversationId).submit();
+            }
+        });
+    });
+});
+</script>
+{% endblock content %}

@@ -16,7 +16,9 @@
                     </div>
 
                     <p class="muted">Email address:</br> {{ mentorprofile.user.email }}</p>
-                    <a href="{% url 'ContactApplication:home' %}"><button>Contact</button></a>
+                    <a href="{% url 'messaging:send_message' recipient_username=mentorprofile.user.username %}">
+                        <button>Contact</button>
+                    </a>
                 </div>
             </div>
         </div>

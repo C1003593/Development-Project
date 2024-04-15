@@ -16,7 +16,9 @@
                 </div>
 
                 <p class="muted">Student number:</br> {{ studentrepprofile.StudentNumber }}</p>
-                <a href="{% url 'ContactApplication:home' %}"><button>Contact</button></a>
+                <a href="{% url 'messaging:send_message' recipient_username=studentrepprofile.user.username %}">
+                    <button>Contact</button>
+                </a>
             </div>
         </div>
     </div>
