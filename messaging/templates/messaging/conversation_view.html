@@ -1,0 +1,66 @@
+{% extends "ContactApplication/base.html" %}
+{% block content %}
+<h1>This chat is with 
+    {% if texts.0.sender == request.user %}
+        {{ texts.0.recipient.username }}
+    {% else %}
+        {{ texts.0.sender.username }}
+    {% endif %}
+</h1>
+<div class="conversationcontainer" id="messageBox">
+    {% for text in texts %}        
+        <p>{{ text.sender.username }} <span class="timestamp-text">{{ text.timestamp }}</span>
+        </br> <span class="text-content">{{ text.content }}</span></p>
+    {% endfor %}
+</div>
+<div class="conversationcontainerbottom">
+    <form method="post" action="{% url 'messaging:reply_message' message_id=original_text.id %}" id="replyForm_{{ conversation_id }}">
+        {% csrf_token %}
+        <textarea name="content" class="replyContent" data-conversation-id="{{ conversation_id }}" style="width: calc(100%); resize: vertical; box-sizing: border-box;" placeholder="Type your message here!" maxlength="650"></textarea>
+        <button type="submit">Send</button>
+    </form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.replyContent').forEach(function(element) {
+            element.addEventListener('input', function() {
+                element.value = element.value.replace(/\n/g, ''); 
+            });
+    
+            element.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter' && !event.shiftKey) {
+                    event.preventDefault();
+                    var conversationId = element.getAttribute('data-conversation-id');
+                    var form = document.getElementById('replyForm_' + conversationId);
+                    if (form) {
+                        form.submit();
+                    } else {
+                        console.error('Form element not found for conversation ID: ' + conversationId);
+                    }
+                }
+            });
+        });
+    });
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        var messageBox = document.getElementById('messageBox');
+        messageBox.scrollTop = messageBox.scrollHeight;
+    });
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        var textareas = document.querySelectorAll('.replyContent');
+        textareas.forEach(function(textarea) {
+            var conversationId = textarea.getAttribute('data-conversation-id');
+            textarea.focus();
+        });
+    });
+</script>
+
+
+{% endblock content %}
+
+
+
+
+

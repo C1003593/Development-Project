@@ -242,26 +242,11 @@ body {
     border-top: 1px solid #ccc; 
     border-left: 1px solid #ccc; 
     border-right: 1px solid #ccc; 
+    padding-left: 5px;
+    padding-right: 5px;
 }
-  .conversationcontainer::-webkit-scrollbar {
-    width: 12px;
-  }
-
-  .conversationcontainer::-webkit-scrollbar-track {
-    background: #f1f1f1;
-  }
-
-  .conversationcontainer::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 6px;
-  }
-
-  .conversationcontainer::-webkit-scrollbar-thumb:hover {
-    background: #555;
-  }
-
   .conversationcontainerbottom {
-    max-height: 140px; 
+    max-height: 200px; 
     background-color: #ffffff;
     width: 400px;
     overflow-y: auto;
@@ -269,3 +254,63 @@ body {
     border-left: 1px solid #ccc; 
     border-right: 1px solid #ccc; 
   }
+
+  .timestamp-text {
+    font-size: 10px;
+
+  }
+
+  .text-content {
+    font-size: 14px;
+  }
+
+  .cardtext {
+    box-shadow: 0 4px 8px 4px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    margin: 5px;
+    text-align: left;
+    font-family: arial;
+    padding-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    height: 250px;
+    max-height: 250px;
+    margin-bottom: 20px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 12px;
+    display: none; /* Hide scroll bars by default */
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+
+.conversationcontainer::-webkit-scrollbar {
+    width: 12px;
+    display: block; 
+}
+
+.conversationcontainer::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.conversationcontainer::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 6px;
+}
+
+.conversationcontainer::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

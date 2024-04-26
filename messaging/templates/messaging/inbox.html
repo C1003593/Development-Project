@@ -1,66 +1,28 @@
 {% extends "ContactApplication/base.html" %}
 {% block content %}
 <h1>These are your messages</h1>
-{% for conversation_id, messages in conversations.items %}    
-        {% with first_message=messages.0 %}
-            {% if first_message.sender.username == request.user.username %}
-                <h2>{{ first_message.recipient.username }}</h2>
-            {% else %}
-                <h2>{{ first_message.sender.username }}</h2>
 
-            {% endif %}
-        {% endwith %}
-        <div class="conversationcontainer" id="messageBox">
-            <ul>
-                {% for message in messages %}
-                    <li>{{ message.sender.username }}: {{ message.content }}</li>
-                {% endfor %}
-            </ul>
-        </div>
-    
-        <div style="bottom: 50px;">
-            <div class="conversationcontainerbottom">
-                {% with last_message=messages|last %}
-                <form method="post" action="{% url 'messaging:reply_message' last_message.id %}" id="replyForm_{{ conversation_id }}">
-                    {% csrf_token %}
-                    <input type="hidden" name="conversation_id" value="{{ conversation_id }}">
-                    <input type="hidden" name="recipient_username" value="{% if last_message.sender != user %}{{ last_message.sender.username }}{% else %}{{ last_message.recipient.username }}{% endif %}">
-                    <textarea name="content" class="replyContent" data-conversation-id="{{ conversation_id }}" style="width: calc(100%); resize: vertical; box-sizing: border-box;" placeholder="Type your message here!"></textarea>
-                    <button type="submit">Reply</button>
-                </form>
-                {% endwith %}
-            </div>
-        </div>
+{% for conversation_id, texts in conversations.items %}
+<div class="cardtext">
+    {% if texts.0.sender == request.user %}
+        <a href="{% url 'messaging:reply_message' message_id=texts.0.id %}">
+            <h2>{{ texts.0.recipient.username }}</h2>
+        </a>
+    {% else %}
+        <a href="{% url 'messaging:reply_message' message_id=texts.0.id %}">
+            <h2>{{ texts.0.sender.username }}</h2>
+        </a>
+    {% endif %}
+    <p>{{ texts.0.content }} - <span class="timestamp-text">{{ texts.0.timestamp }}</span></p>
+        <a href="{% url 'messaging:reply_message' message_id=texts.0.id %}"><button>Reply</button></a>
+</div>
 {% endfor %}
 
+<style>
+    button {
+        width: 30%;
+    }
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.replyContent').forEach(function(element) {
-        element.addEventListener('input', function() {
-            element.value = element.value.replace(/\n/g, ''); 
-        });
+</style>
 
-        element.addEventListener('keypress', function(event) {
-            if (event.key === 'Enter' && !event.shiftKey) {
-                event.preventDefault();
-                var conversationId = element.getAttribute('data-conversation-id');
-                document.getElementById('replyForm_' + conversationId).submit();
-            }
-        });
-    });
-});
-document.addEventListener('DOMContentLoaded', function() {
-    var messageBox = document.getElementById('messageBox');
-    
-    messageBox.scrollTop = messageBox.scrollHeight;
-});
-document.addEventListener('DOMContentLoaded', function() {
-    var textareas = document.querySelectorAll('.replyContent');
-    textareas.forEach(function(textarea) {
-        var conversationId = textarea.getAttribute('data-conversation-id');
-        textarea.focus();
-    });
-});
-</script>
 {% endblock content %}
