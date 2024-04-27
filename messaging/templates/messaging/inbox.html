@@ -6,12 +6,26 @@
 <div class="cardtext">
     {% if texts.0.sender == request.user %}
         <a href="{% url 'messaging:reply_message' message_id=texts.0.id %}">
-            <h2>{{ texts.0.recipient.username }}</h2>
-        </a>
+            <h2>{{ texts.0.recipient.username }}</h2></a>
+
+            {% if texts.0.recipient.mentorprofile %}
+            <p class="text-content">This user is a mentor</p>
+            {% elif texts.0.recipient.studentrepprofile %}
+            <p class="text-content">This user is a student rep</p>
+            {% elif texts.0.recipient.studentprofile %}
+            <p class="text-content">This user is a student</p>
+            {% endif %}
     {% else %}
         <a href="{% url 'messaging:reply_message' message_id=texts.0.id %}">
-            <h2>{{ texts.0.sender.username }}</h2>
-        </a>
+            <h2>{{ texts.0.sender.username }}</h2></a>
+
+                {% if texts.0.sender.mentorprofile %}
+                <p class="text-content">This user is a mentor</p>
+                {% elif texts.0.sender.studentrepprofile %}
+                <p class="text-content">This user is a student rep</p>
+                {% elif texts.0.sender.studentprofile %}
+                <p class="text-content">This user is a student</p>
+                {% endif %}
     {% endif %}
     <p>{{ texts.0.content }} - <span class="timestamp-text">{{ texts.0.timestamp }}</span></p>
         <a href="{% url 'messaging:reply_message' message_id=texts.0.id %}"><button>Reply</button></a>
