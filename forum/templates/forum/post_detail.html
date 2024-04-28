@@ -1,47 +1,123 @@
 {% extends "ContactApplication/base.html" %}
 {% block content %}
-        <div class="cardtext">
-            <p class="text-content">Posted at {{ post.timesubmitted }}<span class="text-content" style="float: right;">This post was made by {{ post.user }}</span></p>
-            <h2><a href="{% url 'forums:post-detail' post.id %}">{{ post.title }}</a></h2>
-            <h5>This post is specified to be a {{ post.typeofpost }}</h5>
+<div class="cardtext">
+    <p class="text-content">Posted at {{ post.timesubmitted }}
+    <span class="text-content" style="float: right;">This post was made by {{ post.user }}</span></p>
+        {% if post.user.mentorprofile %}
+            <p class="text-content">This user is a mentor</p>
+        {% elif post.user.studentrepprofile %}
+            <p class="text-content">This user is a student rep</p>
+        {% elif post.user.studentprofile %}
+            <p class="text-content">This user is a student</p>
+        {% endif %}
+    <h2><a href="{% url 'forums:post-detail' post.id %}">{{ post.title }}</a></h2>
+    <h5>This post is specified to be a {{ post.typeofpost }}</h5>
+    <div class="article-metadata"></div>
+    <p>{{ post.description }}</p>
+
+    {% if object.user == user %}
+        <a href="{% url 'forums:post-update' object.id %}">
+            <button>Update post</button>
+        </a>
+
+        <a href="{% url 'forums:post-delete' object.id %}">
+            <button>Delete post</button>
+        </a>
+    {% endif %}
+
+
+</div>
+
+<h2>Comments:</h2>
+
+{% if comment_page.has_other_pages %}
+    <div class="comment-pagination">
+        {% if comment_page.has_previous %}
+            <a href="?page={{ comment_page.previous_page_number }}">Previous</a>
+        {% endif %}
+        {% if comment_page.has_next %}
+            <a href="?page={{ comment_page.next_page_number }}">Next</a>
+        {% endif %}
+    </div>
+{% endif %}
+</br>
+
+{% if comment_page.object_list %}
+    {% for comment in comment_page.object_list %}
+        <div class="comment">
+            <div class="comment-content">
+                <p>{{ comment.content }}</p>
+            </div>
+            <div class="comment-metadata">
+                <p style="display: inline-block; margin-right: 10px;">Posted by {{ comment.usercomment }} at {{ comment.timesent }}</p>
+                {% if comment.usercomment.mentorprofile %}
+                    <p class="text-content">This user is a mentor</p>
+                {% elif comment.usercomment.studentrepprofile %}
+                    <p class="text-content">This user is a student rep</p>
+                {% elif comment.usercomment.studentprofile %}
+                    <p class="text-content">This user is a student</p>
+                {% endif %}
+                {% if request.user == comment.usercomment %}
+                    <form method="post" action="{% url 'forums:comment-delete' comment.id %}">
+                        {% csrf_token %}
+                        <button type="submit" style="display: none;">Delete</button>  
+                        <img src="/media/Bin.png" alt="Delete" onclick="this.previousElementSibling.click()" style="cursor: pointer; width: 20px; height: 20px;">
+                    </form>
+                </br>
+                {% endif %}
+            </div>
             <div class="article-metadata"></div>
-            <p>{{ post.description }}</p>
-
-        {% if object.user == user %}
-            <a href="{% url 'forums:post-update' object.id %}">
-                <button>Update post</button>
-            </a>
-
-            <a href="{% url 'forums:post-delete' object.id %}">
-                <button>Delete post</button>
-            </a>
-        {% endif %}
-
-        {% if user.is_authenticated %}
-            <a href="#">
-                <button>Reply to post</button>
-            </a>
-        {% endif %}
-
+            <div style="clear: both;"></div> 
         </div>
+    {% endfor %}
+{% else %}
+    <p>No comments yet. Be the first to comment!</p>
+{% endif %}
 
+{% if user.is_authenticated %}
+    <h3>Add a Comment:</h3>
+    <form method="post" action="{% url 'forums:comment-create' post.id %}">
+        {% csrf_token %}
 
+        <input type="hidden" name="post_id" value="{{ post.id }}">
+        <textarea id="comment-content" name="content" placeholder="Write your comment here..." required cols="50" rows="6" maxlength="500"></textarea>
+        <p id="char-count">Characters remaining: 500</p>
+    </br>
+        <button type="submit">Submit Comment</button>
+    </form>
+{% else %}
+    <p>Please <a href="{% url 'login' %}">log in</a> to leave a comment.</p>
+{% endif %}
 
+<style>
+    button {
+        width: 30%;
+    }
+    .cardtext {
+        height: 300px;
+        max-height: 300px;
+    }
+    .comment {
+        margin-bottom: 20px;
+    }
+    .comment-metadata {
+        font-style: italic;
+        font-size: 0.8em;
+    }
+</style>
 
-
-
-
-
-    <style>
-        button {
-            width: 30%;
-            
-        }
-
-        .cardtext {
-            height: 300px;
-            max-height: 300px;
-        }
-    
-    </style>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    var textarea = document.getElementById("comment-content");
+    console.log(textarea); 
+    if (textarea) {
+        textarea.addEventListener("input", function() {
+            var maxLength = 500;
+            var currentLength = this.value.length;
+            var remainingLength = maxLength - currentLength;
+            document.getElementById("char-count").textContent = "Characters remaining: " + remainingLength;
+        });
+    }
+});
+</script>
 {% endblock content %}

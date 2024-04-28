@@ -17,7 +17,7 @@ class Post(models.Model):
         return reverse('forums:post-detail', kwargs = {'pk' : self.pk})
     
 class Comment(models.Model):
-    post = models.ForeignKey(Post, related_name='Post', on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
     content = models.TextField()
     usercomment = models.ForeignKey(User, related_name= 'Comment', on_delete=models.DO_NOTHING)
     timesent = models.DateTimeField(default= timezone.now)

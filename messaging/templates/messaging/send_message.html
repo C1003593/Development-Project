@@ -1,11 +1,22 @@
 {% extends "ContactApplication/base.html" %}
 {% block content %}
+<h1>Send message to {{ recipient.username }}</h1>
+<div class="conversationcontainer">
+    <p>After sending this message you may find this conversation by going on the "Messages" page.</p>
+    <form id="sendMessageForm" method="post">
+        {% csrf_token %}
+        <textarea id="messageContent" name="content" style="width: calc(100%); resize: vertical; box-sizing: border-box;" placeholder="Type your message here!" maxlength="650"></textarea>
+        <button type="submit">Send</button>
+    </form>
+</div>
 
-<form id="sendMessageForm" method="post">
-    {% csrf_token %}
-    <textarea id="messageContent" name="content"></textarea>
-    <button type="submit">Send</button>
-</form>
+<style>
+    .conversationcontainer {
+        min-height: 180px;
+        max-height: 180px;
+        border: 1px solid #ccc; 
+    }
+</style>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {

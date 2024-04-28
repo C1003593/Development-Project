@@ -1,10 +1,27 @@
 {% extends "ContactApplication/base.html" %}
 {% block content %}
 <h1>These are the posts made by this websites' users!</h1>
+<p>There are 2 different post types, problems and discussions. Problems need solutions, so if you see a problem post make sure to help someone out.</p>
+<p>The other type of post is a discussion, these posts will usually be for people who want to talk about something but don't necessarily need solutions.</p>
+
+<div class="make-post-button" style="margin-left: 15px;">
+    <a href="{% url 'forums:post-create' %}">
+        <button>Make Post</button>
+    </a>
+</div>
+</br>
 
 {% for post in posts %}
     <div class="cardtext">
-        <p class="text-content">Posted at {{ post.timesubmitted }}<span class="text-content" style="float: right;">This post was made by {{ post.user }}</span></p>
+        <p class="text-content">Posted at {{ post.timesubmitted }}<span class="text-content" style="float: right;">This post was made by {{ post.user }}</span>
+        {% if post.user.mentorprofile %}
+            <p class="text-content">This user is a mentor</p>
+            {% elif post.user.studentrepprofile %}
+            <p class="text-content">This user is a student rep</p>
+            {% elif post.user.studentprofile %}
+            <p class="text-content">This user is a student</p>
+        {% endif %}
+        </p>
         <h2><a href="{% url 'forums:post-detail' post.id %}">{{ post.title }}</a></h2>
         <h5>This post is specified to be a {{ post.typeofpost }} </h5>
         <div class="article-metadata"></div>
@@ -43,5 +60,8 @@
         height: 300px;
         max-height: 300px;
     }
+    .make-post-button {
+            margin-top: 20px; 
+        }
 </style>
 {% endblock content %}
