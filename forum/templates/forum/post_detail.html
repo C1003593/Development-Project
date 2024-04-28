@@ -1,0 +1,47 @@
+{% extends "ContactApplication/base.html" %}
+{% block content %}
+        <div class="cardtext">
+            <p class="text-content">Posted at {{ post.timesubmitted }}<span class="text-content" style="float: right;">This post was made by {{ post.user }}</span></p>
+            <h2><a href="{% url 'forums:post-detail' post.id %}">{{ post.title }}</a></h2>
+            <h5>This post is specified to be a {{ post.typeofpost }}</h5>
+            <div class="article-metadata"></div>
+            <p>{{ post.description }}</p>
+
+        {% if object.user == user %}
+            <a href="{% url 'forums:post-update' object.id %}">
+                <button>Update post</button>
+            </a>
+
+            <a href="{% url 'forums:post-delete' object.id %}">
+                <button>Delete post</button>
+            </a>
+        {% endif %}
+
+        {% if user.is_authenticated %}
+            <a href="#">
+                <button>Reply to post</button>
+            </a>
+        {% endif %}
+
+        </div>
+
+
+
+
+
+
+
+
+    <style>
+        button {
+            width: 30%;
+            
+        }
+
+        .cardtext {
+            height: 300px;
+            max-height: 300px;
+        }
+    
+    </style>
+{% endblock content %}

@@ -1,0 +1,33 @@
+{% extends "ContactApplication/base.html" %}
+{% block content %}
+<div class="row">
+    <div class="cardtext">
+        <p class="text-content">Posted at {{ post.timesubmitted }}<span class="text-content" style="float: right;">This post was made by {{ post.user }}</span></p>
+        <h2>{{ post.title }}</h2>
+        <h5>This post is specified to be a {{ post.typeofpost }} </h5>
+        <div class="article-metadata"></div>
+        <p>{{ post.description }}</p>
+
+        <form method="POST">
+            {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="button">Delete forum post?</legend>
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-danger" type="submit">Delete</button>
+                </div>
+        </form>
+
+    </div>
+
+        
+            
+</div>
+
+<style>
+    .cardtext {
+        height: 360px;
+        max-height: 360px;
+    }
+</style>
+{% endblock content %}

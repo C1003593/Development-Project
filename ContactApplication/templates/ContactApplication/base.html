@@ -20,7 +20,7 @@
         <div class="sidenav">
             <a href="#">null</a>
             <a href="{% url 'messaging:inbox' %}">Messages</a>
-            <a href="/4">Forums</a>
+            <a href="{% url 'forums:posts' %}">Forums</a>
         </div>
     {% elif user.studentprofile %}
         <div class="sidenav">

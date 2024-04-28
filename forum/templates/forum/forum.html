@@ -1,0 +1,47 @@
+{% extends "ContactApplication/base.html" %}
+{% block content %}
+<h1>These are the posts made by this websites' users!</h1>
+
+{% for post in posts %}
+    <div class="cardtext">
+        <p class="text-content">Posted at {{ post.timesubmitted }}<span class="text-content" style="float: right;">This post was made by {{ post.user }}</span></p>
+        <h2><a href="{% url 'forums:post-detail' post.id %}">{{ post.title }}</a></h2>
+        <h5>This post is specified to be a {{ post.typeofpost }} </h5>
+        <div class="article-metadata"></div>
+        <p>{{ post.description }}</p>
+        <a href="{% url 'forums:post-detail' post.id %}">
+            <button>View post</button>
+        </a>
+    </div>
+{% endfor %}
+
+    <div class="columnend">
+        {% if is_paginated %}
+        {% if page_obj.has_previous %}
+        <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{page_obj.previous_page_number}}">Previous</a>
+        {% endif %}
+        {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+        <a class="btn btn-info mb-4" href="?page={{num}}">{{num}}</a>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+        <a class="btn btn-outline-info mb-4" href="?page={{num}}">{{num}}</a>
+        {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+        <a class="btn btn-outline-info mb-4" href="?page={{page_obj.next_page_number}}">Next</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{page_obj.paginator.num_pages}}">Last</a>
+        {% endif %}
+        {% endif %}
+    </div>
+
+ <style>
+    button {
+        width: 20%;
+    }
+    .cardtext {
+        height: 300px;
+        max-height: 300px;
+    }
+</style>
+{% endblock content %}

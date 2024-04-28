@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'ContactApplication.apps.ContactapplicationConfig',
     'users.apps.UsersConfig',
     'messaging.apps.MessagingConfig',
+    'forum.apps.ForumConfig',
     'crispy_forms',
     #'crispy_bootstrap4',
     
