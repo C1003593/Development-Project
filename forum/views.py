@@ -2,9 +2,13 @@ from django.shortcuts import render, redirect
 from .models import Post, Comment
 from .forms import PostForm, CommentForm
 from django.core.paginator import Paginator
+from django.core.paginator import UnorderedObjectListWarning
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
+import warnings
+
+warnings.filterwarnings('ignore', 'Pagination may yield inconsistent results with an unordered object_list', UnorderedObjectListWarning)
 
 def posts(request):
     forum_posts = {'posts': Post.objects.all(), 'title': 'Forum posts'}

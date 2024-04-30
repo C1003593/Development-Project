@@ -1,6 +1,8 @@
 {% extends "ContactApplication/base.html" %}
 {% block content %}
 <h1>This chat is with 
+    <!--This checks if the user is the original sender or receiver of the message-->
+    <!--Based on this it will show the other user's name and what kind of profile they have-->
     {% if texts.0.sender == request.user %}
         {{ texts.0.recipient.username }}
 
@@ -23,6 +25,7 @@
         {% endif %}
     {% endif %}
 </h1>
+<!--This displays the messages between the 2 users-->
 <div class="conversationcontainer" id="messageBox">
     {% for text in texts %}        
         <p>{{ text.sender.username }} <span class="timestamp-text">{{ text.timestamp }}</span>
@@ -31,6 +34,7 @@
 </div>
 <div class="conversationcontainerbottom">
     <form method="post" action="{% url 'messaging:reply_message' message_id=original_text.id %}" id="replyForm_{{ conversation_id }}">
+        <!--This acts as the reply box for the user, this is important because without this you would be unable to send a message-->
         {% csrf_token %}
         <textarea name="content" class="replyContent" data-conversation-id="{{ conversation_id }}" style="width: calc(100%); resize: vertical; box-sizing: border-box;" placeholder="Type your message here!" maxlength="650"></textarea>
         <button type="submit">Send</button>
@@ -38,6 +42,7 @@
 </div>
 
 <script>
+    /*This allows the user to use the enter key to send the message if they wish to do this instead of pressing the send button*/
     document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.replyContent').forEach(function(element) {
             element.addEventListener('input', function() {
@@ -58,12 +63,12 @@
             });
         });
     });
-    
+    /*This forces the bottom of the message box to be loaded when the page is accessed, meaning the most recent messages will be shown*/
     document.addEventListener('DOMContentLoaded', function() {
         var messageBox = document.getElementById('messageBox');
         messageBox.scrollTop = messageBox.scrollHeight;
     });
-    
+    /*This makes the user focus on the reply box upon loading the page, meaning if the page is loaded they will be able to type straight away*/
     document.addEventListener('DOMContentLoaded', function() {
         var textareas = document.querySelectorAll('.replyContent');
         textareas.forEach(function(textarea) {

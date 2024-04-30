@@ -2,13 +2,16 @@
 {% block content %}
 <div class="row">
     <div class="cardtext">
+        <!--This shows the post off-->
         <p class="text-content">Posted at {{ post.timesubmitted }}<span class="text-content" style="float: right;">This post was made by {{ post.user }}</span></p>
         <h2>{{ post.title }}</h2>
         <h5>This post is specified to be a {{ post.typeofpost }} </h5>
         <div class="article-metadata"></div>
         <p>{{ post.description }}</p>
 
+        <!--This deletes the post when the user presses the delete button-->
         <form method="POST">
+            <!--This token checks that the user is one submitting the request-->
             {% csrf_token %}
                 <fieldset class="form-group">
                     <legend class="button">Delete forum post?</legend>
@@ -25,6 +28,7 @@
 </div>
 
 <style>
+    /*This styles the cardtext element specifically for this page*/
     .cardtext {
         height: 360px;
         max-height: 360px;

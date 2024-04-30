@@ -22,8 +22,8 @@
             <p class="text-content">This user is a student</p>
         {% endif %}
         </p>
-        <h2><a href="{% url 'forums:post-detail' post.id %}">{{ post.title }}</a></h2>
-        <h5>This post is specified to be a {{ post.typeofpost }} </h5>
+        <h2>{{ post.title }}</h2>
+        <h5>{{ post.typeofpost }} </h5>
         <div class="article-metadata"></div>
         <p>{{ post.description }}</p>
         <a href="{% url 'forums:post-detail' post.id %}">
@@ -57,8 +57,8 @@
         width: 20%;
     }
     .cardtext {
-        height: 300px;
-        max-height: 300px;
+        height: 350px;
+        max-height: 350px;
     }
     .make-post-button {
             margin-top: 20px; 

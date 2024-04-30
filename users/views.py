@@ -7,6 +7,7 @@ from .forms import StudentProfileCreation, MentorProfileCreation, StudentRepProf
 from django.utils.crypto import get_random_string
 from django.contrib import messages
 
+#This is for when the user needs to decide which profile they would like
 def profileselection(request):
     return render(request, 'users/profileselection.html', {'title':'Please select profile type'})
 
@@ -28,6 +29,7 @@ def register(request):
 @login_required
 def studentprofilecreate(request):
     if request.method == 'POST':
+        #This uses the StudentProfileCreation form from forms.py
         s_form = StudentProfileCreation(request.POST)
         if s_form.is_valid():
             student_profile = s_form.save(commit=False)
@@ -38,6 +40,7 @@ def studentprofilecreate(request):
         else:
             messages.warning(request, 'Please correct the errors below.')
         return render(request, 'users/studentregister.html', {'s_form': s_form , 'title': 'Student registration form'})
+    #This ensures that the page is rendered before the user enters anything
     else:
         s_form = StudentProfileCreation()
         return render(request, 'users/studentregister.html', {'s_form': s_form , 'title': 'Student registration form'})
@@ -83,6 +86,7 @@ def mentorprofilecreate(request):
 @login_required
 def studentprofile(request):
     if request.method == 'POST':
+        #This checks for both the user account and student account before allowing the user to update
         u_form = UserUpdateForm(request.POST, instance = request.user)
         sp_form = StudentProfileUpdateForm(request.POST, request.FILES, instance = request.user.studentprofile)
         if u_form.is_valid() and sp_form.is_valid():
@@ -154,6 +158,7 @@ def MentorNumGen(request):
             return render(request, 'users/mentorrefnum.html', context)
     else:
         MNG_form = MentorRefNumGenForm()
+        #This renders a 32 digit random string in the form where a mentor would get a reference number
         MNG_form.fields['MentorRefNumberRan'].initial = get_random_string(length=32)
         context = {'MNG_form': MNG_form, 'title': 'Mentor Ref Gen'}
         return render(request, 'users/mentorrefnum.html', context)
